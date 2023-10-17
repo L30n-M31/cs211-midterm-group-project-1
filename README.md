@@ -35,4 +35,4 @@ If you only want to test the program, follow these steps:
 - [x] `EvaluatePostfixExpression.java` : Class that handles the evaluation of postfix expressions
 - [ ] `EvaluatePrefixExpression.java` : Class that handles the evaluation of prefix expressions
 - [x] `InfixToPostfixConverter.java` : Class that handles the conversion of infix to postfix expressions
-- [ ] `InfixToPrefixConverter.java` : Class that handles the conversion of infix to prefix expressions
+- [x] `InfixToPrefixConverter.java` : Class that handles the conversion of infix to prefix expressions
