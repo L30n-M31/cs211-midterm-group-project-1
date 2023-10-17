@@ -26,7 +26,7 @@ public class Test {
         System.out.println("Conversion of Infix Expression to Postfix Expression");
         System.out.println("====================================================");
         System.out.println("Infix expression: " + infixExpression);
-        System.out.println("Postfix expression: " + postfixExpression);
+        System.out.println("Postfix expression: " + postfixExpression + "\n");
         execute.showTable(infixToPostfix.getTable(), 1);
 
         // postfix evaluation test
@@ -36,7 +36,7 @@ public class Test {
         System.out.println("\n\nEvaluation of Postfix Expressions");
         System.out.println("===================================");
         System.out.println("Postfix expression: " + postfixExpression2);
-        System.out.println("Result: " + result);
+        System.out.println("Result: " + result + "\n");
         execute.showTable(evaluate.getTable(), 2);
     }
 } // end of Test class
