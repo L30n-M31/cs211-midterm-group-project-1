@@ -26,13 +26,13 @@ If you only want to test the program, follow these steps:
 
 ## Task Checklist
 - [ ] `ExpressionConverterAndEvaluatorApp.java` : Executable class that implements the GUI
-- [ ] `Test.java` : Executable class for testing the correctness of the program
+- [x] `Test.java` : Executable class for testing the correctness of the program
 - [ ] `Frame.java` : Class containing the GUI structure
 - [x] `Node.java` : Class that holds the template of a Node
 - [x] `Stack.java` : Class that implements the Stack data structure
 - [x] `Stackable.java` : Interface that contains the operations of a Stack
 - [x] `StackUnderflowException.java` : Class that contains the exception for the Stack class
 - [x] `EvaluatePostfixExpression.java` : Class that handles the evaluation of postfix expressions
-- [ ] `EvaluatePrefixExpression.java` : Class that handles the evaluation of prefix expressions
+- [x] `EvaluatePrefixExpression.java` : Class that handles the evaluation of prefix expressions
 - [x] `InfixToPostfixConverter.java` : Class that handles the conversion of infix to postfix expressions
 - [x] `InfixToPrefixConverter.java` : Class that handles the conversion of infix to prefix expressions
