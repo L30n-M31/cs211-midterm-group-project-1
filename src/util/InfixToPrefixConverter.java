@@ -1,0 +1,51 @@
+package util;
+
+import stack.Stack;
+import stack.StackUnderflowException;
+
+import java.util.ArrayList;
+
+public class InfixToPrefixConverter {
+    private final ArrayList<String> table = new ArrayList<>();
+    private final Operations execute;
+
+    public InfixToPrefixConverter() {
+        execute = new Operations();
+    } // end of default constructor
+
+    public String convert(String infixExpression) throws StackUnderflowException {
+        StringBuilder prefixExpression = new StringBuilder();
+        Stack<String> operatorStack = new Stack<>();
+
+        String reversedExpression = execute.reverseExpression(infixExpression);
+
+        for (int i = 0; i < reversedExpression.length(); i++) {
+            String token = String.valueOf(reversedExpression.charAt(i));
+            if (execute.isAnOperand(token)) {
+                prefixExpression.insert(0, token);
+            } else {
+                while (!operatorStack.isEmpty() && execute.precedence(operatorStack.peek(), token)) {
+                    prefixExpression.insert(0, operatorStack.pop());
+                }
+                if (!token.equals("(")) {
+                    operatorStack.push(token);
+                } else {
+                    while (!operatorStack.peek().equals(")")) {
+                        prefixExpression.insert(0, operatorStack.pop());
+                    }
+                    operatorStack.pop(); // pop the closed parenthesis of the stack
+                }
+            }
+            execute.updateTable(token, prefixExpression, operatorStack, table);
+        }
+        while (!operatorStack.isEmpty()) {
+            prefixExpression.insert(0, operatorStack.pop());
+            execute.updateTable("", prefixExpression, operatorStack, table);
+        }
+        return prefixExpression.toString();
+    } // end of convert method
+
+    public ArrayList<String> getTable() {
+        return table;
+    }
+} // end of InfixToPrefixConverter

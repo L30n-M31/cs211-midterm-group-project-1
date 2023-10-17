@@ -3,6 +3,7 @@ package app;
 import stack.StackUnderflowException;
 import util.EvaluatePostfixExpression;
 import util.InfixToPostfixConverter;
+import util.InfixToPrefixConverter;
 import util.Operations;
 
 public class Test {
@@ -28,6 +29,16 @@ public class Test {
         System.out.println("Infix expression: " + infixExpression);
         System.out.println("Postfix expression: " + postfixExpression + "\n");
         execute.showTable(infixToPostfix.getTable(), 1);
+
+        // infix to prefix conversion test
+        InfixToPrefixConverter infixToPrefix = new InfixToPrefixConverter();
+        String infixExpression2 = "((A–(B+C))*D)^(E+F)";
+        String prefixExpression = infixToPrefix.convert(infixExpression2);
+        System.out.println("\n\nConversion of Infix Expression to Prefix Expression");
+        System.out.println("===================================================");
+        System.out.println("Infix expression: " + infixExpression2);
+        System.out.println("Prefix expression: " + prefixExpression + "\n");
+        execute.showTable(infixToPrefix.getTable(), 1);
 
         // postfix evaluation test
         EvaluatePostfixExpression postfix = new EvaluatePostfixExpression();

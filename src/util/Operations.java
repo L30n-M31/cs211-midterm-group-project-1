@@ -29,6 +29,15 @@ public class Operations {
         }
     } // end of evaluateOperands
 
+    public String reverseExpression(String expression) {
+        StringBuilder reversedExpression = new StringBuilder();
+
+        for (int i = expression.length() - 1; i >= 0; i--) {
+            reversedExpression.append(expression.charAt(i));
+        }
+        return reversedExpression.toString();
+    } // end of reverseExpression method
+
     public void updateTable(String token, StringBuilder expression, Stack<String> operatorStack, ArrayList<String> table) throws StackUnderflowException {
         table.add(token + "~" + expression + "~" + operatorStack.stackToString(""));
     } // end of updateTable method
