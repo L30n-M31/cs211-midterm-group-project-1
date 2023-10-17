@@ -1,10 +1,7 @@
 package app;
 
 import stack.StackUnderflowException;
-import util.EvaluatePostfixExpression;
-import util.InfixToPostfixConverter;
-import util.InfixToPrefixConverter;
-import util.Operations;
+import util.*;
 
 public class Test {
     public static void main(String[] args) {
@@ -45,9 +42,19 @@ public class Test {
         String postfixExpression2 = "42 5 + 7 *";
         double result = postfix.evaluate(postfixExpression2);
         System.out.println("\n\nEvaluation of Postfix Expressions");
-        System.out.println("===================================");
+        System.out.println("=================================");
         System.out.println("Postfix expression: " + postfixExpression2);
         System.out.println("Result: " + result + "\n");
         execute.showTable(postfix.getTable(), 2);
-    }
+
+        // prefix evaluation test
+        EvaluatePrefixExpression prefix = new EvaluatePrefixExpression();
+        String prefixExpression2 = "* + 42 5 7";
+        double result2 = prefix.evaluate(prefixExpression2);
+        System.out.println("\n\nEvaluation of Prefix Expressions");
+        System.out.println("================================");
+        System.out.println("Prefix expression: " + prefixExpression2);
+        System.out.println("Result: " + result2 + "\n");
+        execute.showTable(prefix.getTable(), 2);
+    } // end of run method
 } // end of Test class

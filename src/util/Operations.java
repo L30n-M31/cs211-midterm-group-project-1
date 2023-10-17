@@ -38,6 +38,14 @@ public class Operations {
         return reversedExpression.toString();
     } // end of reverseExpression method
 
+    public void reverseArray(String[] array) {
+        for (int i = 0; i < array.length / 2; i++) {
+            String temp = array[i];
+            array[i] = array[array.length - 1 - i];
+            array[array.length - 1 - i] = temp;
+        }
+    } // end of reverseArray method
+
     public void updateTable(String token, StringBuilder expression, Stack<String> operatorStack, ArrayList<String> table) throws StackUnderflowException {
         table.add(token + "~" + expression + "~" + operatorStack.stackToString(""));
     } // end of updateTable method
