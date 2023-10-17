@@ -5,15 +5,15 @@ import stack.StackUnderflowException;
 
 import java.util.ArrayList;
 
-public class Evaluator {
+public class EvaluatePostfixExpression {
     private final ArrayList<String> table = new ArrayList<>();
     private final Operations execute;
 
-    public Evaluator() {
+    public EvaluatePostfixExpression() {
         execute = new Operations();
     } // end of default constructor
 
-    public double evaluatePostfix(String postfixExpression) throws StackUnderflowException {
+    public double evaluate(String postfixExpression) throws StackUnderflowException {
         Stack<Double> operandStack = new Stack<>();
         String[] charArray = postfixExpression.split(" ");
         double result = 0;

@@ -1,7 +1,7 @@
 package app;
 
 import stack.StackUnderflowException;
-import util.Evaluator;
+import util.EvaluatePostfixExpression;
 import util.InfixToPostfixConverter;
 import util.Operations;
 
@@ -30,13 +30,13 @@ public class Test {
         execute.showTable(infixToPostfix.getTable(), 1);
 
         // postfix evaluation test
-        Evaluator evaluate = new Evaluator();
+        EvaluatePostfixExpression postfix = new EvaluatePostfixExpression();
         String postfixExpression2 = "42 5 + 7 *";
-        double result = evaluate.evaluatePostfix(postfixExpression2);
+        double result = postfix.evaluate(postfixExpression2);
         System.out.println("\n\nEvaluation of Postfix Expressions");
         System.out.println("===================================");
         System.out.println("Postfix expression: " + postfixExpression2);
         System.out.println("Result: " + result + "\n");
-        execute.showTable(evaluate.getTable(), 2);
+        execute.showTable(postfix.getTable(), 2);
     }
 } // end of Test class
