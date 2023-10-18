@@ -32,13 +32,13 @@ public class GraphicEditor {
     public void setAppHeadingFormat(JLabel heading) {
         heading.setFont(new Font("Monospaced", Font.BOLD, 22));
         heading.setForeground(lavender);
-    }
+    } // end of setAppHeadingFormat method
 
     public void setFontFormat(JLabel label) {
         label.setFont(new Font("Monospaced", Font.BOLD, 25));
         label.setHorizontalAlignment(JLabel.CENTER);
         label.setForeground(teal);
-    }
+    } // end of setFontFormat method
 
     public void setFontFormat(JTextField textField) {
         textField.setFont(new Font("Monospaced", Font.BOLD, 25));
@@ -49,13 +49,13 @@ public class GraphicEditor {
 
         Border customBoder = new LineBorder(snowWhite, 4);
         textField.setBorder(customBoder);
-    }
+    } // end of setFontFormat method
 
     public void setFontFormat(JButton button) {
         button.setFont(new Font("Monospaced", Font.BOLD, 16));
         button.setBackground(teal);
         button.setForeground(lavender);
-    }
+    } // end of setFontFormat method
 
     public JScrollPane setTable(String[][] data, String[] columns) {
         DefaultTableModel model = new DefaultTableModel(data, columns);
@@ -77,5 +77,5 @@ public class GraphicEditor {
         scrollPane.getVerticalScrollBar().setBackground(teal);
 
         return scrollPane;
-    }
+    } // end of setTable method
 } // end of GraphicEditor class

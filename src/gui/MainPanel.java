@@ -26,7 +26,7 @@ public class MainPanel extends JPanel {
         addComponentsToPanel();
         addActionListeners();
         frame.add(mainPanel);
-    }
+    } // end of default constructor
 
     public void initializeComponents() {
         // main panel
@@ -137,7 +137,7 @@ public class MainPanel extends JPanel {
         convertToPrefixBT.addActionListener(new ButtonAction());
         evaluatePostfixBT.addActionListener(new ButtonAction());
         evaluatePrefixBT.addActionListener(new ButtonAction());
-    }
+    } // end of addActionListeners method
 
     private class ButtonAction implements ActionListener {
         @Override
@@ -169,6 +169,6 @@ public class MainPanel extends JPanel {
             } catch (StackUnderflowException ex) {
                 throw new RuntimeException(ex);
             }
-        }
+        } // end of actionPerformed method
     } // end of ButtonAction class
 } // end of MainPanel class
