@@ -3,6 +3,7 @@ package util;
 import stack.Stack;
 import stack.StackUnderflowException;
 
+import javax.swing.*;
 import java.util.ArrayList;
 
 public class InfixToPrefixConverter {
@@ -19,6 +20,11 @@ public class InfixToPrefixConverter {
         Stack<String> operatorStack = new Stack<>();
 
         String reversedExpression = execute.reverseExpression(infixExpression);
+
+        if (!execute.validateString(infixExpression, 1)) {
+            JOptionPane.showMessageDialog(null, "Invalid Expression");
+            return null;
+        }
 
         for (int i = 0; i < reversedExpression.length(); i++) {
             String token = String.valueOf(reversedExpression.charAt(i));

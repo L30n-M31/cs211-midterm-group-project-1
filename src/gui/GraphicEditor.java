@@ -47,8 +47,8 @@ public class GraphicEditor {
         textField.setBackground(teal);
         textField.setForeground(lavender);
 
-        Border customBoder = new LineBorder(snowWhite, 4);
-        textField.setBorder(customBoder);
+        Border customBorder = new LineBorder(snowWhite, 4);
+        textField.setBorder(customBorder);
     } // end of setFontFormat method
 
     public void setFontFormat(JButton button) {

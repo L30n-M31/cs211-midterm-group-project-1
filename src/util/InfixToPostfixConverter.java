@@ -3,6 +3,7 @@ package util;
 import stack.Stack;
 import stack.StackUnderflowException;
 
+import javax.swing.*;
 import java.util.ArrayList;
 
 public class InfixToPostfixConverter {
@@ -17,6 +18,11 @@ public class InfixToPostfixConverter {
         table = new ArrayList<>();
         StringBuilder postfixExpression = new StringBuilder();
         Stack<String> operatorStack = new Stack<>();
+
+        if (!execute.validateString(infixExpression, 1)) {
+            JOptionPane.showMessageDialog(null, "Invalid Expression");
+            return null;
+        }
 
         for (int i = 0; i < infixExpression.length(); i++) {
             String token = String.valueOf(infixExpression.charAt(i));

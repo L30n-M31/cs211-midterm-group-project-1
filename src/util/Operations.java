@@ -31,6 +31,24 @@ public class Operations {
         }
     } // end of evaluateOperands
 
+    public boolean validateString(String expression, int option) {
+        switch (option) {
+            case 1 -> {
+                for (int i = 0; i < expression.length(); i++) {
+                    if (!isAnOperand(String.valueOf(expression.charAt(i))) && !isAnOperand(String.valueOf(expression.charAt(i + 1))))
+                        return false;
+                }
+            }
+            case 2 -> {
+                for (int i = 0; i < expression.length(); i++) {
+                    if (expression.contains("(") || expression.contains(")"))
+                        return false;
+                }
+            }
+        }
+        return true;
+    }
+
     public String reverseExpression(String expression) {
         StringBuilder reversedExpression = new StringBuilder();
 

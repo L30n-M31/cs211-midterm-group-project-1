@@ -149,12 +149,14 @@ public class MainPanel extends JPanel {
                 if (e.getSource() == convertToPostfixBT) {
                     stringResult = infixToPostfix.convert(convertExpressionTF.getText());
                     convertResultTF.setText(stringResult);
-                    execute.displayTable(infixToPostfix.getTable(), 1);
+                    if (!infixToPostfix.getTable().isEmpty())
+                        execute.displayTable(infixToPostfix.getTable(), 1);
                 }
                 if (e.getSource() == convertToPrefixBT) {
                     stringResult = infixToPrefix.convert(convertExpressionTF.getText());
                     convertResultTF.setText(stringResult);
-                    execute.displayTable(infixToPrefix.getTable(), 1);
+                    if (!infixToPrefix.getTable().isEmpty())
+                        execute.displayTable(infixToPrefix.getTable(), 1);
                 }
                 if (e.getSource() == evaluatePostfixBT) {
                     result = postfix.evaluate(evaluateExpressionTF.getText());
