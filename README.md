@@ -25,9 +25,12 @@ If you only want to test the program, follow these steps:
 2. In the run method, there comments that separate each operations. Simply change the expressions to get different results.
 
 ## Task Checklist
-- [ ] `ExpressionConverterAndEvaluatorApp.java` : Executable class that implements the GUI
+- [x] `ExpressionConverterAndEvaluatorApp.java` : Executable class that implements the GUI
 - [x] `Test.java` : Executable class for testing the correctness of the program
-- [ ] `Frame.java` : Class containing the GUI structure
+- [x] `GUI.java` : Class containing the GUI structure
+- [x] `GraphicEditor.java` : Class containing the design of the GUI
+- [ ] `InformationPanel.java` : Class that contains the info panel of the GUI
+- [x] `MainPanel.java` : Class that contains the main panel of the GUI
 - [x] `Node.java` : Class that holds the template of a Node
 - [x] `Stack.java` : Class that implements the Stack data structure
 - [x] `Stackable.java` : Interface that contains the operations of a Stack
