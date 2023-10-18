@@ -6,7 +6,7 @@ import stack.StackUnderflowException;
 import java.util.ArrayList;
 
 public class EvaluatePostfixExpression {
-    private final ArrayList<String> table = new ArrayList<>();
+    private ArrayList<String> table;
     private final Operations execute;
 
     public EvaluatePostfixExpression() {
@@ -14,6 +14,7 @@ public class EvaluatePostfixExpression {
     } // end of default constructor
 
     public double evaluate(String postfixExpression) throws StackUnderflowException {
+        table = new ArrayList<>();
         Stack<Double> operandStack = new Stack<>();
         String[] charArray = postfixExpression.split(" ");
         double result = 0;

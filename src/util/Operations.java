@@ -3,6 +3,8 @@ package util;
 import stack.Stack;
 import stack.StackUnderflowException;
 
+import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
 import java.util.ArrayList;
 
 public class Operations {
@@ -54,6 +56,9 @@ public class Operations {
         table.add(toke + "~" + firstOperand + "~" + secondOperand + "~" + value + "~" + operandStack.stackToString(", "));
     } // end of updateTable method
 
+    /**
+     * Method to show the table for the Test class
+     */
     public void showTable(ArrayList<String> table, int option) {
         if (option == 1) {
             System.out.printf("%-9s%-21s%-17s%n", "Symbol", "Postfix Expression", "Operator Stack");
@@ -79,4 +84,55 @@ public class Operations {
             }
         }
     } // end of showTable method
+
+    public void displayTable(ArrayList<String> table, int option) {
+        String tableTitle = null;
+        String[] columns = new String[0];
+        String[][] data = new String[0][0];
+
+        switch (option) {
+            case 1 -> {
+                tableTitle = "Convert Table";
+                columns = new String[]{"Symbol", "Expression", "Operator"};
+                data = new String[table.size()][3];
+
+                for (int i = 0; i < table.size(); i++) {
+                    String[] array = table.get(i).split("~");
+
+                    data[i][0] = array[0];
+                    data[i][1] = array[1];
+                    if (array.length == 3)
+                        data[i][2] = array[2];
+                    else
+                        data[i][2] = "";
+                }
+            }
+            case 2 -> {
+                tableTitle = "Evaluate Table";
+                columns = new String[]{"Symbol", "Operand 1", "Operand 2", "Value", "Operand Stack"};
+                data = new String[table.size()][5];
+
+                for (int i = 0; i < table.size(); i++) {
+                    String[] array = table.get(i).split("~");
+
+                    data[i][0] = array[0];
+                    data[i][1] = array[1];
+                    data[i][2] = array[2];
+                    data[i][3] = array[3];
+                    if (array.length == 5)
+                        data[i][4] = array[4];
+                    else
+                        data[i][4] = "";
+                }
+            }
+        }
+
+        DefaultTableModel model = new DefaultTableModel(data, columns);
+
+        JTable jTable = new JTable(model);
+
+        JScrollPane scrollPane = new JScrollPane(jTable);
+
+        JOptionPane.showMessageDialog(null, scrollPane, tableTitle, JOptionPane.PLAIN_MESSAGE);
+    } // end of displayTable method
 } // end of Operations class

@@ -1,29 +1,23 @@
 package gui;
 
 import stack.StackUnderflowException;
-import util.EvaluatePostfixExpression;
-import util.EvaluatePrefixExpression;
-import util.InfixToPostfixConverter;
-import util.InfixToPrefixConverter;
+import util.*;
 
 import javax.swing.*;
-import javax.swing.border.Border;
-import javax.swing.border.LineBorder;
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
 
 public class MainPanel extends JPanel {
     private final GraphicEditor edit = new GraphicEditor();
+    private final Operations execute = new Operations();
     private JPanel mainPanel;
     private JLabel convertTitle, evaluateTitle, convertExpressionLB, evaluateExpressionLB, convertResultLB, evaluateResultLB;
     private JTextField convertExpressionTF, evaluateExpressionTF, convertResultTF, evaluateResultTF;
     private JButton convertToPostfixBT, convertToPrefixBT, evaluatePostfixBT, evaluatePrefixBT;
-    private InfixToPrefixConverter infixToPrefix = new InfixToPrefixConverter();
-    private InfixToPostfixConverter infixToPostfix = new InfixToPostfixConverter();
-    private EvaluatePostfixExpression postfix = new EvaluatePostfixExpression();
-    private EvaluatePrefixExpression prefix = new EvaluatePrefixExpression();
+    private final InfixToPrefixConverter infixToPrefix = new InfixToPrefixConverter();
+    private final InfixToPostfixConverter infixToPostfix = new InfixToPostfixConverter();
+    private final EvaluatePostfixExpression postfix = new EvaluatePostfixExpression();
+    private final EvaluatePrefixExpression prefix = new EvaluatePrefixExpression();
 
     public MainPanel(JFrame frame) {
         initializeComponents();
@@ -148,40 +142,32 @@ public class MainPanel extends JPanel {
     private class ButtonAction implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
-            String stringResult = "";
-            double result = 0;
+            String stringResult;
+            double result;
 
-            if (e.getSource() == convertToPostfixBT) {
-                try {
+            try {
+                if (e.getSource() == convertToPostfixBT) {
                     stringResult = infixToPostfix.convert(convertExpressionTF.getText());
-                } catch (StackUnderflowException ex) {
-                    throw new RuntimeException(ex);
+                    convertResultTF.setText(stringResult);
+                    execute.displayTable(infixToPostfix.getTable(), 1);
                 }
-                convertResultTF.setText(stringResult);
-            }
-            if (e.getSource() == convertToPrefixBT) {
-                try {
+                if (e.getSource() == convertToPrefixBT) {
                     stringResult = infixToPrefix.convert(convertExpressionTF.getText());
-                } catch (StackUnderflowException ex) {
-                    throw new RuntimeException(ex);
+                    convertResultTF.setText(stringResult);
+                    execute.displayTable(infixToPrefix.getTable(), 1);
                 }
-                convertResultTF.setText(stringResult);
-            }
-            if (e.getSource() == evaluatePostfixBT) {
-                try {
+                if (e.getSource() == evaluatePostfixBT) {
                     result = postfix.evaluate(evaluateExpressionTF.getText());
-                } catch (StackUnderflowException ex) {
-                    throw new RuntimeException(ex);
+                    evaluateResultTF.setText(String.valueOf(result));
+                    execute.displayTable(postfix.getTable(), 2);
                 }
-                evaluateResultTF.setText(String.valueOf(result));
-            }
-            if (e.getSource() == evaluatePrefixBT) {
-                try {
+                if (e.getSource() == evaluatePrefixBT) {
                     result = prefix.evaluate(evaluateExpressionTF.getText());
-                } catch (StackUnderflowException ex) {
-                    throw new RuntimeException(ex);
+                    evaluateResultTF.setText(String.valueOf(result));
+                    execute.displayTable(prefix.getTable(), 2);
                 }
-                evaluateResultTF.setText(String.valueOf(result));
+            } catch (StackUnderflowException ex) {
+                throw new RuntimeException(ex);
             }
         }
     } // end of ButtonAction class

@@ -6,7 +6,7 @@ import stack.StackUnderflowException;
 import java.util.ArrayList;
 
 public class EvaluatePrefixExpression {
-    private final ArrayList<String> table = new ArrayList<>();
+    private ArrayList<String> table;
     private final Operations execute;
 
     public EvaluatePrefixExpression() {
@@ -14,6 +14,7 @@ public class EvaluatePrefixExpression {
     } // end of default constructor
 
     public double evaluate(String prefixExpression) throws StackUnderflowException {
+        table = new ArrayList<>();
         Stack<Double> operandStack = new Stack<>();
         String[] charArray = prefixExpression.split(" ");
         execute.reverseArray(charArray);

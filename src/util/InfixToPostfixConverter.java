@@ -6,7 +6,7 @@ import stack.StackUnderflowException;
 import java.util.ArrayList;
 
 public class InfixToPostfixConverter {
-    private final ArrayList<String> table = new ArrayList<>();
+    private ArrayList<String> table;
     private final Operations execute;
 
     public InfixToPostfixConverter() {
@@ -14,6 +14,7 @@ public class InfixToPostfixConverter {
     } // end of default constructor
 
     public String convert(String infixExpression) throws StackUnderflowException {
+        table = new ArrayList<>();
         StringBuilder postfixExpression = new StringBuilder();
         Stack<String> operatorStack = new Stack<>();
 

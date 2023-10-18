@@ -1,7 +1,6 @@
 package gui;
 
 import javax.swing.*;
-import java.awt.*;
 
 public class GUI extends JFrame {
     private final GraphicEditor edit = new GraphicEditor();

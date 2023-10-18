@@ -6,7 +6,7 @@ import stack.StackUnderflowException;
 import java.util.ArrayList;
 
 public class InfixToPrefixConverter {
-    private final ArrayList<String> table = new ArrayList<>();
+    private ArrayList<String> table;
     private final Operations execute;
 
     public InfixToPrefixConverter() {
@@ -14,6 +14,7 @@ public class InfixToPrefixConverter {
     } // end of default constructor
 
     public String convert(String infixExpression) throws StackUnderflowException {
+        table = new ArrayList<>();
         StringBuilder prefixExpression = new StringBuilder();
         Stack<String> operatorStack = new Stack<>();
 
