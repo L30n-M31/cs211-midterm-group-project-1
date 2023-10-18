@@ -19,7 +19,8 @@ public class InfixToPostfixConverter {
         StringBuilder postfixExpression = new StringBuilder();
         Stack<String> operatorStack = new Stack<>();
 
-        if (!execute.validateString(infixExpression, 1)) {
+        // checks if the given infix expression is correct
+        if (!execute.validateString(infixExpression)) {
             JOptionPane.showMessageDialog(null, "Invalid Expression");
             return null;
         }
