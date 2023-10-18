@@ -3,6 +3,7 @@ package gui;
 import javax.swing.*;
 import javax.swing.border.Border;
 import javax.swing.border.LineBorder;
+import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 
 public class GraphicEditor {
@@ -54,5 +55,27 @@ public class GraphicEditor {
         button.setFont(new Font("Monospaced", Font.BOLD, 16));
         button.setBackground(teal);
         button.setForeground(lavender);
+    }
+
+    public JScrollPane setTable(String[][] data, String[] columns) {
+        DefaultTableModel model = new DefaultTableModel(data, columns);
+
+        JTable table = new JTable(model);
+        JScrollPane scrollPane = new JScrollPane(table);
+
+        table.setOpaque(false);
+        table.getTableHeader().setReorderingAllowed(false);
+        table.getTableHeader().setResizingAllowed(false);
+        table.getTableHeader().setFont(new Font("Monospaced", Font.BOLD, 18));
+        table.setFont(new Font("Monospaced", Font.BOLD, 14));
+
+        table.setBackground(lavender);
+        table.setForeground(teal);
+        table.getTableHeader().setBackground(teal);
+        table.getTableHeader().setForeground(lavender);
+        scrollPane.getViewport().setBackground(teal);
+        scrollPane.getVerticalScrollBar().setBackground(teal);
+
+        return scrollPane;
     }
 } // end of GraphicEditor class

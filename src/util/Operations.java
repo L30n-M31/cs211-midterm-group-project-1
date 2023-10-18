@@ -1,10 +1,10 @@
 package util;
 
+import gui.GraphicEditor;
 import stack.Stack;
 import stack.StackUnderflowException;
 
 import javax.swing.*;
-import javax.swing.table.DefaultTableModel;
 import java.util.ArrayList;
 
 public class Operations {
@@ -86,6 +86,8 @@ public class Operations {
     } // end of showTable method
 
     public void displayTable(ArrayList<String> table, int option) {
+        GraphicEditor edit = new GraphicEditor();
+
         String tableTitle = null;
         String[] columns = new String[0];
         String[][] data = new String[0][0];
@@ -126,13 +128,6 @@ public class Operations {
                 }
             }
         }
-
-        DefaultTableModel model = new DefaultTableModel(data, columns);
-
-        JTable jTable = new JTable(model);
-
-        JScrollPane scrollPane = new JScrollPane(jTable);
-
-        JOptionPane.showMessageDialog(null, scrollPane, tableTitle, JOptionPane.PLAIN_MESSAGE);
+        JOptionPane.showMessageDialog(null, edit.setTable(data, columns), tableTitle, JOptionPane.PLAIN_MESSAGE);
     } // end of displayTable method
 } // end of Operations class
