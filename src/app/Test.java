@@ -39,7 +39,7 @@ public class Test {
 
         // postfix evaluation test
         EvaluatePostfixExpression postfix = new EvaluatePostfixExpression();
-        String postfixExpression2 = "42 5 + 7 *";
+        String postfixExpression2 = "6 2 3 + - 3 8 2 / + * 2 ^ 3 +";
         double result = postfix.evaluate(postfixExpression2);
         System.out.println("\n\nEvaluation of Postfix Expressions");
         System.out.println("=================================");
