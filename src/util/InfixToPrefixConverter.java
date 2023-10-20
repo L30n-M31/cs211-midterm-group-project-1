@@ -22,7 +22,7 @@ public class InfixToPrefixConverter {
         String reversedExpression = execute.reverseExpression(infixExpression);
 
         // checks if the given infix expression is correct
-        if (!execute.validateString(infixExpression)) {
+        if (execute.validateString(infixExpression)) {
             JOptionPane.showMessageDialog(null, "Invalid Expression");
             return null;
         }

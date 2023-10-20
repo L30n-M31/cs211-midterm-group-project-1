@@ -20,7 +20,7 @@ public class InfixToPostfixConverter {
         Stack<String> operatorStack = new Stack<>();
 
         // checks if the given infix expression is correct
-        if (!execute.validateString(infixExpression)) {
+        if (execute.validateString(infixExpression)) {
             JOptionPane.showMessageDialog(null, "Invalid Expression");
             return null;
         }

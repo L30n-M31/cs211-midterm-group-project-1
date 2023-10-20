@@ -16,12 +16,12 @@ public class EvaluatePrefixExpression {
     public double evaluate(String prefixExpression) throws StackUnderflowException {
         table = new ArrayList<>();
         Stack<Double> operandStack = new Stack<>();
-        String[] charArray = prefixExpression.split(" ");
-        execute.reverseArray(charArray);
+        String[] tokenArray = prefixExpression.split(" ");
+        execute.reverseArray(tokenArray);
 
         double result = 0;
 
-        for (String s : charArray) {
+        for (String s : tokenArray) {
             String token = String.valueOf(s);
             if (execute.isAnOperand(token)) {
                 operandStack.push(Double.valueOf(token));

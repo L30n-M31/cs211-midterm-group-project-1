@@ -16,10 +16,10 @@ public class EvaluatePostfixExpression {
     public double evaluate(String postfixExpression) throws StackUnderflowException {
         table = new ArrayList<>();
         Stack<Double> operandStack = new Stack<>();
-        String[] charArray = postfixExpression.split(" ");
+        String[] tokenArray = postfixExpression.split(" ");
         double result = 0;
 
-        for (String s : charArray) {
+        for (String s : tokenArray) {
             String token = String.valueOf(s);
             if (execute.isAnOperand(token)) {
                 operandStack.push(Double.valueOf(token));
