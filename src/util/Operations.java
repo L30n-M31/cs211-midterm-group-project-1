@@ -22,7 +22,7 @@ public class Operations {
     public boolean precedence(String stackChar, String expressionChar) {
         char stackToken = stackChar.charAt(0);
         char expressionToken = expressionChar.charAt(0);
-        return ((stackToken == '^' || stackToken == '*' || stackToken == '/') && (expressionToken == '+' || expressionToken == '-'));
+        return (stackToken == '^' || stackToken == '*' || stackToken == '/') && (expressionToken == '+' || expressionToken == '-');
     } // end of precedence method
 
     public double evaluateOperands(double firstOperand, double secondOperand, String token) {
