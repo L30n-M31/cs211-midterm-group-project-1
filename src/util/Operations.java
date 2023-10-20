@@ -42,11 +42,11 @@ public class Operations {
 
         for (int i = 0; i < expression.length(); i++) {
             if (isAnOperator(String.valueOf(expression.charAt(i))) && isAnOperator(String.valueOf(expression.charAt(i + 1))))
-                return false;
+                return true;
             if (expression.charAt(i) == '(') openParenthesis++;
             if (expression.charAt(i) == ')') closedParenthesis++;
         }
-        return openParenthesis == closedParenthesis;
+        return openParenthesis != closedParenthesis;
     }
 
     public String reverseExpression(String expression) {
