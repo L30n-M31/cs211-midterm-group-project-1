@@ -50,11 +50,7 @@ public class Operations {
     }
 
     public String reverseExpression(String expression) {
-        StringBuilder reversedExpression = new StringBuilder();
-
-        for (int i = expression.length() - 1; i >= 0; i--) {
-            reversedExpression.append(expression.charAt(i));
-        }
+        StringBuilder reversedExpression = new StringBuilder(expression).reverse();
         return reversedExpression.toString();
     } // end of reverseExpression method
 
