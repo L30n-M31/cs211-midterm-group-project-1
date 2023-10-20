@@ -17,11 +17,11 @@ public class Operations {
     public boolean isAnOperator(String expressionChar) {
         char token = expressionChar.charAt(0);
         return token == '^' || token == '/' || token == '*' || token == '+' || token == '-';
-    }
+    } // end of isAnOperator method
 
-    public boolean precedence(String stackChar, String expressionChar) {
-        char stackToken = stackChar.charAt(0);
-        char expressionToken = expressionChar.charAt(0);
+    public boolean precedence(String stackSymbol, String expressionSymbol) {
+        char stackToken = stackSymbol.charAt(0);
+        char expressionToken = expressionSymbol.charAt(0);
         return (stackToken == '^' || stackToken == '*' || stackToken == '/') && (expressionToken == '+' || expressionToken == '-');
     } // end of precedence method
 
@@ -29,7 +29,10 @@ public class Operations {
         switch (token) {
             case "^" -> { return (int) Math.pow(firstOperand, secondOperand); }
             case "*" -> { return firstOperand * secondOperand; }
-            case "/" -> { return firstOperand / secondOperand; }
+            case "/" -> {
+                if (secondOperand != 0) return firstOperand / secondOperand;
+                throw new ArithmeticException("Division by zero");
+            }
             case "+" -> { return  firstOperand + secondOperand; }
             case "-" -> { return firstOperand - secondOperand; }
             default -> { return 0; }
@@ -47,7 +50,7 @@ public class Operations {
             if (expression.charAt(i) == ')') closedParenthesis++;
         }
         return openParenthesis != closedParenthesis;
-    }
+    } // end of validateString method
 
     public String reverseExpression(String expression) {
         StringBuilder reversedExpression = new StringBuilder(expression).reverse();
@@ -66,8 +69,8 @@ public class Operations {
         table.add(token + "~" + expression + "~" + operatorStack.stackToString(""));
     } // end of updateTable method
 
-    public void updateTable(String toke, String firstOperand, String secondOperand, String value, Stack<Double> operandStack, ArrayList<String> table) throws StackUnderflowException {
-        table.add(toke + "~" + firstOperand + "~" + secondOperand + "~" + value + "~" + operandStack.stackToString(", "));
+    public void updateTable(String token, String firstOperand, String secondOperand, String value, Stack<Double> operandStack, ArrayList<String> table) throws StackUnderflowException {
+        table.add(token + "~" + firstOperand + "~" + secondOperand + "~" + value + "~" + operandStack.stackToString(", "));
     } // end of updateTable method
 
     /**

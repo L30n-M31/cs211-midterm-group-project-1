@@ -17,7 +17,7 @@ public class EvaluatePostfixExpression {
         table = new ArrayList<>();
         Stack<Double> operandStack = new Stack<>();
         String[] tokenArray = postfixExpression.split(" ");
-        double result = 0;
+        double value = 0;
 
         for (String s : tokenArray) {
             String token = String.valueOf(s);
@@ -27,12 +27,12 @@ public class EvaluatePostfixExpression {
             } else {
                 double secondOperand = operandStack.pop();
                 double firstOperand = operandStack.pop();
-                result = execute.evaluateOperands(firstOperand, secondOperand, token);
-                operandStack.push(result);
-                execute.updateTable(token, String.valueOf(firstOperand), String.valueOf(secondOperand), String.valueOf(result), operandStack, table);
+                value = execute.evaluateOperands(firstOperand, secondOperand, token);
+                operandStack.push(value);
+                execute.updateTable(token, String.valueOf(firstOperand), String.valueOf(secondOperand), String.valueOf(value), operandStack, table);
             }
         }
-        return result;
+        return operandStack.pop();
     } // end of result class
 
     public ArrayList<String> getTable() {
