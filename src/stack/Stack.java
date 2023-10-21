@@ -24,20 +24,17 @@ public class Stack<T> implements Stackable<T> {
 
     @Override
     public T pop() throws StackUnderflowException {
-        if (!isEmpty()) {
-            T element = top.getData();
-            top = top.getNext();
-            size--;
-            return element;
-        }
-        throw new StackUnderflowException();
+        if (isEmpty()) throw new StackUnderflowException();
+        T element = top.getData();
+        top = top.getNext();
+        size--;
+        return element;
     } // end of pop method
 
     @Override
     public T peek() throws StackUnderflowException {
-        if (!isEmpty())
-            return top.getData();
-        throw new StackUnderflowException();
+        if (isEmpty()) throw new StackUnderflowException();
+        return top.getData();
     } // end of pop method
 
     @Override
@@ -46,18 +43,17 @@ public class Stack<T> implements Stackable<T> {
     } // end of isEmpty method
 
     @Override
-    public String stackToString(String delimiter) throws StackUnderflowException {
+    public String stackToString(String delimiter) {
         StringBuilder stackString = new StringBuilder();
 
-        Stack<T> temp = new Stack<>();
         Node<T> curr = top;
-
         for (int i = 0; i < size; i++) {
-            temp.push(curr.getData());
+            if (i == 0) {
+                stackString.insert(0, curr.getData());
+            } else {
+                stackString.insert(0, curr.getData() + delimiter);
+            }
             curr = curr.getNext();
-        }
-        while (!temp.isEmpty()) {
-            stackString.append(temp.pop()).append(delimiter);
         }
         return stackString.toString();
     } // end of stackToString method
