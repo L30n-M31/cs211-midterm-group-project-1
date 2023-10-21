@@ -2,8 +2,6 @@ package util;
 
 import gui.GraphicEditor;
 import stack.Stack;
-import stack.StackUnderflowException;
-
 import javax.swing.*;
 import java.util.ArrayList;
 
@@ -65,11 +63,11 @@ public class Operations {
         }
     } // end of reverseArray method
 
-    public void updateTable(String token, StringBuilder expression, Stack<String> operatorStack, ArrayList<String> table) throws StackUnderflowException {
+    public void updateTable(String token, StringBuilder expression, Stack<String> operatorStack, ArrayList<String> table) {
         table.add(token + "~" + expression + "~" + operatorStack.stackToString(""));
     } // end of updateTable method
 
-    public void updateTable(String token, double firstOperand, double secondOperand, double value, Stack<Double> operandStack, ArrayList<String> table) throws StackUnderflowException {
+    public void updateTable(String token, double firstOperand, double secondOperand, double value, Stack<Double> operandStack, ArrayList<String> table) {
         String firstOperandStr = Double.isNaN(firstOperand) ? "" : String.valueOf(firstOperand);
         String secondOperandStr = Double.isNaN(secondOperand) ? "" : String.valueOf(secondOperand);
         String valueStr = Double.isNaN(value) ? "" : String.valueOf(value);
