@@ -69,8 +69,12 @@ public class Operations {
         table.add(token + "~" + expression + "~" + operatorStack.stackToString(""));
     } // end of updateTable method
 
-    public void updateTable(String token, String firstOperand, String secondOperand, String value, Stack<Double> operandStack, ArrayList<String> table) throws StackUnderflowException {
-        table.add(token + "~" + firstOperand + "~" + secondOperand + "~" + value + "~" + operandStack.stackToString(", "));
+    public void updateTable(String token, double firstOperand, double secondOperand, double value, Stack<Double> operandStack, ArrayList<String> table) throws StackUnderflowException {
+        String firstOperandStr = Double.isNaN(firstOperand) ? "" : String.valueOf(firstOperand);
+        String secondOperandStr = Double.isNaN(secondOperand) ? "" : String.valueOf(secondOperand);
+        String valueStr = Double.isNaN(value) ? "" : String.valueOf(value);
+
+        table.add(token + "~" + firstOperandStr + "~" + secondOperandStr + "~" + valueStr + "~" + operandStack.stackToString(", "));
     } // end of updateTable method
 
     /**
