@@ -6,5 +6,5 @@ public interface Stackable<T> {
     T pop() throws StackUnderflowException;
     T peek() throws StackUnderflowException;
     boolean isEmpty();
-    String stackToString(String delimiter) throws StackUnderflowException;
+    String stackToString(String delimiter);
 } // end of Stackable interface
