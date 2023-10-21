@@ -47,11 +47,10 @@ public class Stack<T> implements Stackable<T> {
         StringBuilder stackString = new StringBuilder();
 
         Node<T> curr = top;
-        for (int i = 0; i < size; i++) {
-            if (i == 0) {
-                stackString.insert(0, curr.getData());
-            } else {
-                stackString.insert(0, curr.getData() + delimiter);
+        while (curr != null) {
+            stackString.insert(0, curr.getData());
+            if (curr.getNext() != null) {
+                stackString.insert(0, delimiter);
             }
             curr = curr.getNext();
         }
