@@ -17,19 +17,19 @@ public class EvaluatePostfixExpression {
         table = new ArrayList<>();
         Stack<Double> operandStack = new Stack<>();
         String[] tokenArray = postfixExpression.split(" ");
-        double value = 0;
+        double value;
 
         for (String s : tokenArray) {
             String token = String.valueOf(s);
             if (execute.isAnOperand(token)) {
                 operandStack.push(Double.valueOf(token));
-                execute.updateTable(token, "", "", "", operandStack, table);
+                execute.updateTable(token, Double.NaN, Double.NaN, Double.NaN, operandStack, table);
             } else {
                 double secondOperand = operandStack.pop();
                 double firstOperand = operandStack.pop();
                 value = execute.evaluateOperands(firstOperand, secondOperand, token);
                 operandStack.push(value);
-                execute.updateTable(token, String.valueOf(firstOperand), String.valueOf(secondOperand), String.valueOf(value), operandStack, table);
+                execute.updateTable(token, firstOperand, secondOperand, value, operandStack, table);
             }
         }
         return operandStack.pop();
