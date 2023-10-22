@@ -27,8 +27,8 @@ public class EvaluatePrefixExpression {
                 operandStack.push(Double.valueOf(token));
                 execute.updateTable(token, Double.NaN, Double.NaN, Double.NaN, operandStack, table);
             } else {
-                double secondOperand = operandStack.pop();
                 double firstOperand = operandStack.pop();
+                double secondOperand = operandStack.pop();
                 value = execute.evaluateOperands(firstOperand, secondOperand, token);
                 operandStack.push(value);
                 execute.updateTable(token, firstOperand, secondOperand, value, operandStack, table);
