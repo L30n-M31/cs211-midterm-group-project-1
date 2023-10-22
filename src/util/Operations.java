@@ -23,6 +23,10 @@ public class Operations {
         return (stackToken == '^' || stackToken == '*' || stackToken == '/') && (expressionToken == '+' || expressionToken == '-');
     } // end of precedence method
 
+    public boolean isBooleanValue(String value) {
+        return value.equals("1.0001") || value.equals("1.00001");
+    } //end of isBooleanValue method
+
     public double evaluateOperands(double firstOperand, double secondOperand, String token) {
         switch (token) {
             case "^" -> { return (int) Math.pow(firstOperand, secondOperand); }
@@ -33,9 +37,18 @@ public class Operations {
             }
             case "+" -> { return  firstOperand + secondOperand; }
             case "-" -> { return firstOperand - secondOperand; }
+            case "%" -> { return firstOperand % secondOperand; }
+            case "<" -> { return firstOperand < secondOperand ? 1.0001 : 1.00001; }
+            case ">" -> { return firstOperand > secondOperand ? 1.0001 : 1.00001; }
+            case "<=" -> { return firstOperand <= secondOperand ? 1.0001 : 1.00001; }
+            case ">=" -> { return firstOperand >= secondOperand ? 1.0001 : 1.00001; }
             default -> { return 0; }
         }
     } // end of evaluateOperands
+
+    public String getStringResult(double result) {
+        return isBooleanValue(String.valueOf(result)) ? (result == 1.0001 ? "True" : "False") : String.valueOf(result);
+    } // end of showFinalResult
 
     public boolean validateString(String expression) {
         int openParenthesis = 0;
@@ -62,6 +75,13 @@ public class Operations {
             array[array.length - 1 - i] = temp;
         }
     } // end of reverseArray method
+
+    public boolean determineEvaluation(String expression) {
+        String firstStr = String.valueOf(expression.charAt(0));
+        String secondStr = String.valueOf(expression.charAt(1));
+
+        return isAnOperand(firstStr) && isAnOperand(secondStr);
+    } // end of determineEvaluation method
 
     public void updateTable(String token, StringBuilder expression, Stack<String> operatorStack, ArrayList<String> table) {
         table.add(token + "~" + expression + "~" + operatorStack.stackToString(""));
@@ -96,7 +116,11 @@ public class Operations {
             for (String s : table) {
                 String[] array = s.split("~");
                 if (array.length == 5) {
-                    System.out.printf("%-9s%-12s%-12s%-12s%-22s%n", array[0], array[1], array[2], array[3], array[4]);
+                    String str = array[3];
+                    if (isBooleanValue(array[3])) {
+                        str = getStringResult(Double.parseDouble(array[3]));
+                    }
+                    System.out.printf("%-9s%-12s%-12s%-12s%-22s%n", array[0], array[1], array[2], str, array[4]);
                 } else {
                     System.out.printf("%-9s%-12s%-12s%-12s%n", array[0], array[1], array[2], array[3]);
                 }
@@ -139,7 +163,11 @@ public class Operations {
                     data[i][0] = array[0];
                     data[i][1] = array[1];
                     data[i][2] = array[2];
-                    data[i][3] = array[3];
+                    if (array[3] != "") {
+                        data[i][3] = getStringResult(Double.parseDouble(array[3]));
+                    } else {
+                        data[i][3] = array[3];
+                    }
                     if (array.length == 5)
                         data[i][4] = array[4];
                     else
