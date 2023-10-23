@@ -8,43 +8,42 @@ import java.util.Objects;
 
 public class Operations {
 
-    public boolean isAnOperand(String expressionChar) {
-        char token = expressionChar.charAt(0);
-        return Character.isLetterOrDigit(token);
+    public boolean isOperand(String expressionChar) {
+        char symbol = expressionChar.charAt(0);
+        return Character.isLetterOrDigit(symbol);
     } // end of isAnOperand method
 
-    public boolean isAnOperator(String expressionChar) {
-        char token = expressionChar.charAt(0);
-        return token == '^' || token == '/' || token == '*' || token == '+' || token == '-';
+    public boolean isOperator(String expressionChar) {
+        char operator = expressionChar.charAt(0);
+        return operator == '^' || operator == '/' || operator == '*' || operator == '+' || operator == '-';
     } // end of isAnOperator method
 
-    public boolean isAComparisonOperator(String expressionChar) {
-        char token = expressionChar.charAt(0);
-        return token == '=' || token == '!' || token == '>' || token == '<';
+    public boolean isComparisonOperator(String expressionChar) {
+        char operator = expressionChar.charAt(0);
+        return operator == '=' || operator == '!' || operator == '>' || operator == '<';
     } // end of isAComparisonOperator
 
     public String getComparisonOperator(String expression, int index) {
-        String tokenStr = String.valueOf(expression.charAt(index));
-        String adjacentToken = String.valueOf(expression.charAt(index + 1));
+        String currentSymbol = String.valueOf(expression.charAt(index));
+        String nextSymbol = String.valueOf(expression.charAt(index + 1));
 
-        if (isAComparisonOperator(adjacentToken)) {
-            tokenStr += adjacentToken;
+        if (isComparisonOperator(nextSymbol)) {
+            currentSymbol += nextSymbol;
         }
-        return tokenStr;
+        return currentSymbol;
     } // end of getComparisonOperator
 
     public boolean precedence(String stackSymbol, String expressionSymbol) {
-        char stackToken = stackSymbol.charAt(0);
-        char expressionToken = expressionSymbol.charAt(0);
-        return (stackToken == '^' || stackToken == '*' || stackToken == '/') && (expressionToken == '+' || expressionToken == '-');
+        return (stackSymbol.equals("^") || stackSymbol.equals("*") || stackSymbol.equals("/") || stackSymbol.equals("%"))
+                && (expressionSymbol.equals("+") || expressionSymbol.equals("-"));
     } // end of precedence method
 
     public boolean isBooleanValue(String value) {
         return value.equals("1.0001") || value.equals("1.00001");
     } //end of isBooleanValue method
 
-    public double evaluateOperands(double firstOperand, double secondOperand, String token) {
-        switch (token) {
+    public double evaluateOperands(double firstOperand, double secondOperand, String symbol) {
+        switch (symbol) {
             case "^" -> { return (int) Math.pow(firstOperand, secondOperand); }
             case "*" -> { return firstOperand * secondOperand; }
             case "/" -> {
@@ -73,12 +72,12 @@ public class Operations {
         int closedParenthesis = 0;
 
         for (int i = 0; i < expression.length(); i++) {
-            if (isAnOperator(String.valueOf(expression.charAt(i))) && isAnOperator(String.valueOf(expression.charAt(i + 1))))
-                return true;
+            if (isOperand(String.valueOf(expression.charAt(i))) && isOperator(String.valueOf(expression.charAt(i + 1))))
+                return false;
             if (expression.charAt(i) == '(') openParenthesis++;
             if (expression.charAt(i) == ')') closedParenthesis++;
         }
-        return openParenthesis != closedParenthesis;
+        return openParenthesis == closedParenthesis;
     } // end of validateString method
 
     public String reverseExpression(String expression) {
@@ -96,21 +95,19 @@ public class Operations {
 
     public boolean determineEvaluation(String expression) {
         String firstStr = String.valueOf(expression.charAt(0));
-        String secondStr = String.valueOf(expression.charAt(1));
-
-        return isAnOperand(firstStr) && isAnOperand(secondStr);
+        return isOperand(firstStr);
     } // end of determineEvaluation method
 
-    public void updateTable(String token, StringBuilder expression, Stack<String> operatorStack, ArrayList<String> table) {
-        table.add(token + "~" + expression + "~" + operatorStack.stackToString(""));
+    public void updateTable(String symbol, StringBuilder expression, Stack<String> operatorStack, ArrayList<String> table) {
+        table.add(symbol + "~" + expression + "~" + operatorStack.stackToString(""));
     } // end of updateTable method
 
-    public void updateTable(String token, double firstOperand, double secondOperand, double value, Stack<Double> operandStack, ArrayList<String> table) {
+    public void updateTable(String symbol, double firstOperand, double secondOperand, double value, Stack<Double> operandStack, ArrayList<String> table) {
         String firstOperandStr = Double.isNaN(firstOperand) ? "" : String.valueOf(firstOperand);
         String secondOperandStr = Double.isNaN(secondOperand) ? "" : String.valueOf(secondOperand);
         String valueStr = Double.isNaN(value) ? "" : String.valueOf(value);
 
-        table.add(token + "~" + firstOperandStr + "~" + secondOperandStr + "~" + valueStr + "~" + operandStack.stackToString(", "));
+        table.add(symbol + "~" + firstOperandStr + "~" + secondOperandStr + "~" + valueStr + "~" + operandStack.stackToString(", "));
     } // end of updateTable method
 
     public void displayTable(ArrayList<String> table, int option) {
