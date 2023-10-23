@@ -13,7 +13,7 @@ public class MainPanel extends JPanel {
     private JPanel mainPanel;
     private JLabel convertTitle, evaluateTitle, convertExpressionLB, evaluateExpressionLB, convertResultLB, evaluateResultLB;
     private JTextField convertExpressionTF, evaluateExpressionTF, convertResultTF, evaluateResultTF;
-    private JButton convertToPostfixBT, convertToPrefixBT, evaluatePostfixBT, evaluatePrefixBT;
+    private JButton convertToPostfixBT, convertToPrefixBT, evaluateBT;
     private final InfixToPrefixConverter infixToPrefix = new InfixToPrefixConverter();
     private final InfixToPostfixConverter infixToPostfix = new InfixToPostfixConverter();
     private final EvaluatePostfixExpression postfix = new EvaluatePostfixExpression();
@@ -49,8 +49,7 @@ public class MainPanel extends JPanel {
         // buttons
         convertToPostfixBT = new JButton("<html><div align='center'>CONVERT TO<br>POSTFIX</div></html>");
         convertToPrefixBT = new JButton("<html><div align='center'>CONVERT TO<br>PREFIX</div></html>");
-        evaluatePostfixBT = new JButton("<html><div align='center'>EVALUATE<br>POSTFIX</div></html>");
-        evaluatePrefixBT = new JButton("<html><div align='center'>EVALUATE<br>PREFIX</div></html>");
+        evaluateBT = new JButton("<html><div align='center'>EVALUATE<br>EXPRESSION</div></html>");
     } // end of initializeComponents method
 
     public void setBounds() {
@@ -78,9 +77,7 @@ public class MainPanel extends JPanel {
         // buttons
         convertToPrefixBT.setBounds(20, 310, 175, 60);
         convertToPostfixBT.setBounds(255, 310,175,60);
-
-        evaluatePrefixBT.setBounds(20, 680, 175, 60);
-        evaluatePostfixBT.setBounds(255, 680, 175, 60);
+        evaluateBT.setBounds(137, 680, 175, 60);
     } // end of setBounds method
 
     public void setGraphics() {
@@ -106,8 +103,7 @@ public class MainPanel extends JPanel {
         // buttons
         edit.setFontFormat(convertToPrefixBT);
         edit.setFontFormat(convertToPostfixBT);
-        edit.setFontFormat(evaluatePrefixBT);
-        edit.setFontFormat(evaluatePostfixBT);
+        edit.setFontFormat(evaluateBT);
     } // end of setGraphics method
 
     public void addComponentsToPanel() {
@@ -128,15 +124,13 @@ public class MainPanel extends JPanel {
         // buttons
         mainPanel.add(convertToPostfixBT);
         mainPanel.add(convertToPrefixBT);
-        mainPanel.add(evaluatePostfixBT);
-        mainPanel.add(evaluatePrefixBT);
+        mainPanel.add(evaluateBT);
     } // end of addComponentsToPanel method
 
     public void addActionListeners() {
         convertToPostfixBT.addActionListener(new ButtonAction());
         convertToPrefixBT.addActionListener(new ButtonAction());
-        evaluatePostfixBT.addActionListener(new ButtonAction());
-        evaluatePrefixBT.addActionListener(new ButtonAction());
+        evaluateBT.addActionListener(new ButtonAction());
     } // end of addActionListeners method
 
     private class ButtonAction implements ActionListener {
@@ -158,15 +152,19 @@ public class MainPanel extends JPanel {
                     if (!infixToPrefix.getTable().isEmpty())
                         execute.displayTable(infixToPrefix.getTable(), 1);
                 }
-                if (e.getSource() == evaluatePostfixBT) {
-                    result = postfix.evaluate(evaluateExpressionTF.getText());
-                    evaluateResultTF.setText(String.valueOf(result));
-                    execute.displayTable(postfix.getTable(), 2);
-                }
-                if (e.getSource() == evaluatePrefixBT) {
-                    result = prefix.evaluate(evaluateExpressionTF.getText());
-                    evaluateResultTF.setText(String.valueOf(result));
-                    execute.displayTable(prefix.getTable(), 2);
+                if (e.getSource() == evaluateBT) {
+                    if (execute.determineEvaluation(evaluateExpressionTF.getText())) {
+                        result = postfix.evaluate(evaluateExpressionTF.getText());
+                    } else {
+                        result = prefix.evaluate(evaluateExpressionTF.getText());
+                    }
+                    evaluateResultTF.setText(execute.getStringResult(result));
+
+                    if (execute.determineEvaluation(evaluateExpressionTF.getText())) {
+                        execute.displayTable(postfix.getTable(), 2);
+                    } else {
+                        execute.displayTable(prefix.getTable(), 2);
+                    }
                 }
             } catch (StackUnderflowException ex) {
                 throw new RuntimeException(ex);
