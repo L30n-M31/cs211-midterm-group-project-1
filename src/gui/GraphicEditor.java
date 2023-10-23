@@ -3,6 +3,7 @@ package gui;
 import javax.swing.*;
 import javax.swing.border.Border;
 import javax.swing.border.LineBorder;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 
@@ -72,7 +73,20 @@ public class GraphicEditor {
         table.getTableHeader().setReorderingAllowed(false);
         table.getTableHeader().setResizingAllowed(false);
         table.getTableHeader().setFont(new Font("Monospaced", Font.BOLD, 18));
-        table.setFont(new Font("Monospaced", Font.BOLD, 14));
+        table.setFont(new Font("Monospaced", Font.BOLD, 16));
+
+        DefaultTableCellRenderer center = new DefaultTableCellRenderer();
+        center.setHorizontalAlignment(SwingConstants.CENTER);
+
+        int lastColumnIndex = columns.length - 1;
+
+        for (int i = 0; i < lastColumnIndex; i++) {
+            table.getColumnModel().getColumn(i).setCellRenderer(center);
+        }
+
+        int chosenColumn = (columns.length == 3) ? 0 : 4;
+        int columnWidth = (columns.length == 3) ? 40 : 400;
+        table.getColumnModel().getColumn(chosenColumn).setPreferredWidth(columnWidth);
 
         table.setBackground(lavender);
         table.setForeground(teal);
@@ -80,6 +94,10 @@ public class GraphicEditor {
         table.getTableHeader().setForeground(lavender);
         scrollPane.getViewport().setBackground(teal);
         scrollPane.getVerticalScrollBar().setBackground(teal);
+
+        int scrollPaneWidth = (columns.length == 3) ? 600 : 900;
+        int scrollPaneHeight = (columns.length == 3) ? 300 : 400;
+        scrollPane.setPreferredSize(new Dimension(scrollPaneWidth, scrollPaneHeight));
 
         return scrollPane;
     } // end of setTable method
