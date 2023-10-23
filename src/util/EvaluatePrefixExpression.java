@@ -18,8 +18,7 @@ public class EvaluatePrefixExpression {
         Stack<Double> operandStack = new Stack<>();
         String[] tokenArray = prefixExpression.split(" ");
         execute.reverseArray(tokenArray);
-
-        double value = 0;
+        double value;
 
         for (String s : tokenArray) {
             String token = String.valueOf(s);
