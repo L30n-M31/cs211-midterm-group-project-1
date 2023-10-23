@@ -27,6 +27,12 @@ public class InfixToPostfixConverter {
 
         for (int i = 0; i < infixExpression.length(); i++) {
             String token = String.valueOf(infixExpression.charAt(i));
+            if (execute.isAComparisonOperator(token)) {
+                token = execute.getComparisonOperator(infixExpression, i);
+                if (token.length() == 2) {
+                    i++;
+                }
+            }
             if (execute.isAnOperand(token)) {
                 postfixExpression.append(token);
             } else {

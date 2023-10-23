@@ -29,6 +29,12 @@ public class InfixToPrefixConverter {
 
         for (int i = 0; i < reversedExpression.length(); i++) {
             String token = String.valueOf(reversedExpression.charAt(i));
+            if (execute.isAComparisonOperator(token)) {
+                token = execute.getComparisonOperator(infixExpression, i);
+                if (token.length() == 2) {
+                    i++;
+                }
+            }
             if (execute.isAnOperand(token)) {
                 prefixExpression.insert(0, token);
             } else {
