@@ -27,6 +27,4 @@ public class GUI extends JFrame {
         frame.setResizable(false);
         frame.setVisible(true);
     } // end of setFrame method
-
-
 } // end of Frame class
