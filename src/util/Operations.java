@@ -17,6 +17,21 @@ public class Operations {
         return token == '^' || token == '/' || token == '*' || token == '+' || token == '-';
     } // end of isAnOperator method
 
+    public boolean isAComparisonOperator(String expressionChar) {
+        char token = expressionChar.charAt(0);
+        return token == '=' || token == '!' || token == '>' || token == '<';
+    } // end of isAComparisonOperator
+
+    public String getComparisonOperator(String expression, int index) {
+        String tokenStr = String.valueOf(expression.charAt(index));
+        String adjacentToken = String.valueOf(expression.charAt(index + 1));
+
+        if (isAComparisonOperator(adjacentToken)) {
+            tokenStr += adjacentToken;
+        }
+        return tokenStr;
+    } // end of getComparisonOperator
+
     public boolean precedence(String stackSymbol, String expressionSymbol) {
         char stackToken = stackSymbol.charAt(0);
         char expressionToken = expressionSymbol.charAt(0);
@@ -38,6 +53,8 @@ public class Operations {
             case "+" -> { return  firstOperand + secondOperand; }
             case "-" -> { return firstOperand - secondOperand; }
             case "%" -> { return firstOperand % secondOperand; }
+            case "==" -> { return firstOperand == secondOperand ? 1.0001 : 1.00001; }
+            case "!=" -> { return firstOperand != secondOperand ? 1.0001 : 1.00001; }
             case "<" -> { return firstOperand < secondOperand ? 1.0001 : 1.00001; }
             case ">" -> { return firstOperand > secondOperand ? 1.0001 : 1.00001; }
             case "<=" -> { return firstOperand <= secondOperand ? 1.0001 : 1.00001; }
@@ -94,39 +111,6 @@ public class Operations {
 
         table.add(token + "~" + firstOperandStr + "~" + secondOperandStr + "~" + valueStr + "~" + operandStack.stackToString(", "));
     } // end of updateTable method
-
-    /**
-     * Method to show the table for the Test class
-     */
-    public void showTable(ArrayList<String> table, int option) {
-        if (option == 1) {
-            System.out.printf("%-9s%-21s%-17s%n", "Symbol", "Postfix Expression", "Operator Stack");
-            System.out.printf("%-9s%-21s%-17s%n", "=======", "===================", "===============");
-            for (String s : table) {
-                String[] array = s.split("~");
-                if (array.length == 3) {
-                    System.out.printf("%-9s%-21s%-17s%n", array[0], array[1], array[2]);
-                } else {
-                    System.out.printf("%-9s%-21s%n", array[0], array[1]);
-                }
-            }
-        } else {
-            System.out.printf("%-9s%-12s%-12s%-12s%-22s%n", "Symbol", "Operand 1", "Operand 2", "Value", "Operand Stack");
-            System.out.printf("%-9s%-12s%-12s%-12s%-22s%n", "=======", "==========", "==========", "==========", "====================");
-            for (String s : table) {
-                String[] array = s.split("~");
-                if (array.length == 5) {
-                    String str = array[3];
-                    if (isBooleanValue(array[3])) {
-                        str = getStringResult(Double.parseDouble(array[3]));
-                    }
-                    System.out.printf("%-9s%-12s%-12s%-12s%-22s%n", array[0], array[1], array[2], str, array[4]);
-                } else {
-                    System.out.printf("%-9s%-12s%-12s%-12s%n", array[0], array[1], array[2], array[3]);
-                }
-            }
-        }
-    } // end of showTable method
 
     public void displayTable(ArrayList<String> table, int option) {
         GraphicEditor edit = new GraphicEditor();
