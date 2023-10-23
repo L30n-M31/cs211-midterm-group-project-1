@@ -22,27 +22,27 @@ public class InfixToPrefixConverter {
         String reversedExpression = execute.reverseExpression(infixExpression);
 
         // checks if the given infix expression is correct
-        if (execute.validateString(infixExpression)) {
+        if (!execute.validateString(infixExpression)) {
             JOptionPane.showMessageDialog(null, "Invalid Expression");
             return null;
         }
 
         for (int i = 0; i < reversedExpression.length(); i++) {
-            String token = String.valueOf(reversedExpression.charAt(i));
-            if (execute.isAComparisonOperator(token)) {
-                token = execute.getComparisonOperator(infixExpression, i);
-                if (token.length() == 2) {
+            String symbol = String.valueOf(reversedExpression.charAt(i));
+            if (execute.isComparisonOperator(symbol)) {
+                symbol = execute.getComparisonOperator(infixExpression, i);
+                if (symbol.length() == 2) {
                     i++;
                 }
             }
-            if (execute.isAnOperand(token)) {
-                prefixExpression.insert(0, token);
+            if (execute.isOperand(symbol)) {
+                prefixExpression.insert(0, symbol);
             } else {
-                while (!operatorStack.isEmpty() && execute.precedence(operatorStack.peek(), token)) {
+                while (!operatorStack.isEmpty() && execute.precedence(operatorStack.peek(), symbol)) {
                     prefixExpression.insert(0, operatorStack.pop());
                 }
-                if (!token.equals("(")) {
-                    operatorStack.push(token);
+                if (!symbol.equals("(")) {
+                    operatorStack.push(symbol);
                 } else {
                     while (!operatorStack.peek().equals(")")) {
                         prefixExpression.insert(0, operatorStack.pop());
@@ -50,7 +50,7 @@ public class InfixToPrefixConverter {
                     operatorStack.pop(); // pop the closed parenthesis of the stack
                 }
             }
-            execute.updateTable(token, prefixExpression, operatorStack, table);
+            execute.updateTable(symbol, prefixExpression, operatorStack, table);
         }
         while (!operatorStack.isEmpty()) {
             prefixExpression.insert(0, operatorStack.pop());

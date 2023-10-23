@@ -20,27 +20,27 @@ public class InfixToPostfixConverter {
         Stack<String> operatorStack = new Stack<>();
 
         // checks if the given infix expression is correct
-        if (execute.validateString(infixExpression)) {
+        if (!execute.validateString(infixExpression)) {
             JOptionPane.showMessageDialog(null, "Invalid Expression");
             return null;
         }
 
         for (int i = 0; i < infixExpression.length(); i++) {
-            String token = String.valueOf(infixExpression.charAt(i));
-            if (execute.isAComparisonOperator(token)) {
-                token = execute.getComparisonOperator(infixExpression, i);
-                if (token.length() == 2) {
+            String symbol = String.valueOf(infixExpression.charAt(i));
+            if (execute.isComparisonOperator(symbol)) {
+                symbol = execute.getComparisonOperator(infixExpression, i);
+                if (symbol.length() == 2) {
                     i++;
                 }
             }
-            if (execute.isAnOperand(token)) {
-                postfixExpression.append(token);
+            if (execute.isOperand(symbol)) {
+                postfixExpression.append(symbol);
             } else {
-                while (!operatorStack.isEmpty() && execute.precedence(operatorStack.peek(), token)) {
+                while (!operatorStack.isEmpty() && execute.precedence(operatorStack.peek(), symbol)) {
                     postfixExpression.append(operatorStack.pop());
                 }
-                if (!token.equals(")")) {
-                    operatorStack.push(token);
+                if (!symbol.equals(")")) {
+                    operatorStack.push(symbol);
                 } else {
                     while (!operatorStack.peek().equals("(")) {
                         postfixExpression.append(operatorStack.pop());
@@ -48,7 +48,7 @@ public class InfixToPostfixConverter {
                     operatorStack.pop(); // pop the open parenthesis of the stack
                 }
             }
-            execute.updateTable(token, postfixExpression, operatorStack, table);
+            execute.updateTable(symbol, postfixExpression, operatorStack, table);
         }
         while (!operatorStack.isEmpty()) {
             postfixExpression.append(operatorStack.pop());
