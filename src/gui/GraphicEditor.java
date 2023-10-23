@@ -57,6 +57,11 @@ public class GraphicEditor {
         button.setForeground(lavender);
     } // end of setFontFormat method
 
+    public void setInfoFormat(JLabel label) {
+        label.setFont(new Font("Monospaced", Font.BOLD, 16));
+        label.setForeground(lavender);
+    }
+
     public JScrollPane setTable(String[][] data, String[] columns) {
         DefaultTableModel model = new DefaultTableModel(data, columns);
 
