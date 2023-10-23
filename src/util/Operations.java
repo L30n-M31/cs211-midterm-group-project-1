@@ -4,6 +4,7 @@ import gui.GraphicEditor;
 import stack.Stack;
 import javax.swing.*;
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class Operations {
 
@@ -147,7 +148,7 @@ public class Operations {
                     data[i][0] = array[0];
                     data[i][1] = array[1];
                     data[i][2] = array[2];
-                    if (array[3] != "") {
+                    if (!Objects.equals(array[3], "")) {
                         data[i][3] = getStringResult(Double.parseDouble(array[3]));
                     } else {
                         data[i][3] = array[3];
