@@ -16,20 +16,20 @@ public class EvaluatePostfixExpression {
     public double evaluate(String postfixExpression) throws StackUnderflowException {
         table = new ArrayList<>();
         Stack<Double> operandStack = new Stack<>();
-        String[] tokenArray = postfixExpression.split(" ");
+        String[] charArray = postfixExpression.split(" ");
         double value;
 
-        for (String s : tokenArray) {
-            String token = String.valueOf(s);
-            if (execute.isAnOperand(token)) {
-                operandStack.push(Double.valueOf(token));
-                execute.updateTable(token, Double.NaN, Double.NaN, Double.NaN, operandStack, table);
+        for (String s : charArray) {
+            String symbol = String.valueOf(s);
+            if (execute.isOperand(symbol)) {
+                operandStack.push(Double.valueOf(symbol));
+                execute.updateTable(symbol, Double.NaN, Double.NaN, Double.NaN, operandStack, table);
             } else {
                 double secondOperand = operandStack.pop();
                 double firstOperand = operandStack.pop();
-                value = execute.evaluateOperands(firstOperand, secondOperand, token);
+                value = execute.evaluateOperands(firstOperand, secondOperand, symbol);
                 operandStack.push(value);
-                execute.updateTable(token, firstOperand, secondOperand, value, operandStack, table);
+                execute.updateTable(symbol, firstOperand, secondOperand, value, operandStack, table);
             }
         }
         return operandStack.pop();

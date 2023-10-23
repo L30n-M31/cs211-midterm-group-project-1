@@ -16,21 +16,21 @@ public class EvaluatePrefixExpression {
     public double evaluate(String prefixExpression) throws StackUnderflowException {
         table = new ArrayList<>();
         Stack<Double> operandStack = new Stack<>();
-        String[] tokenArray = prefixExpression.split(" ");
-        execute.reverseArray(tokenArray);
+        String[] charArray = prefixExpression.split(" ");
+        execute.reverseArray(charArray);
         double value;
 
-        for (String s : tokenArray) {
-            String token = String.valueOf(s);
-            if (execute.isAnOperand(token)) {
-                operandStack.push(Double.valueOf(token));
-                execute.updateTable(token, Double.NaN, Double.NaN, Double.NaN, operandStack, table);
+        for (String s : charArray) {
+            String symbol = String.valueOf(s);
+            if (execute.isOperand(symbol)) {
+                operandStack.push(Double.valueOf(symbol));
+                execute.updateTable(symbol, Double.NaN, Double.NaN, Double.NaN, operandStack, table);
             } else {
                 double firstOperand = operandStack.pop();
                 double secondOperand = operandStack.pop();
-                value = execute.evaluateOperands(firstOperand, secondOperand, token);
+                value = execute.evaluateOperands(firstOperand, secondOperand, symbol);
                 operandStack.push(value);
-                execute.updateTable(token, firstOperand, secondOperand, value, operandStack, table);
+                execute.updateTable(symbol, firstOperand, secondOperand, value, operandStack, table);
             }
         }
         return operandStack.pop();
