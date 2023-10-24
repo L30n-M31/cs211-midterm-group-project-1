@@ -16,13 +16,9 @@ This project is a part of our Data Structures course for the midterms. The proje
 - `src/util` contains the classes for converting and evaluating expressions.
 
 ## Usage
-If you want to run the full program, follow these steps:
+To run the program, follow these steps:
 1. Go to the ExpressionConverterAndEvaluatorApp.java class located in the app package.
 2. Run the stated class.
-
-If you only want to test the program, follow these steps:
-1. Go to the Test.java class located in the app package.
-2. In the run method, there comments that separate each operations. Simply change the expressions to get different results.
 
 ## Task Checklist
 - [x] `ExpressionConverterAndEvaluatorApp.java` : Executable class that implements the GUI
