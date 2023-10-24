@@ -25,7 +25,7 @@ To run the program, follow these steps:
 - [x] `Test.java` : Executable class for testing the correctness of the program
 - [x] `GUI.java` : Class containing the GUI structure
 - [x] `GraphicEditor.java` : Class containing the design of the GUI
-- [ ] `InformationPanel.java` : Class that contains the info panel of the GUI
+- [x] `InformationPanel.java` : Class that contains the info panel of the GUI
 - [x] `MainPanel.java` : Class that contains the main panel of the GUI
 - [x] `Node.java` : Class that holds the template of a Node
 - [x] `Stack.java` : Class that implements the Stack data structure
