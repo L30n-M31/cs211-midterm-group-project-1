@@ -6,7 +6,7 @@
 </details>
 
 ## Description
-This project is a part of our Data Structures course for the midterms. The project requires us to implement the Stack data structure in converting infix expressions to prefix and postfix expressions and in evaluating postfix expressions.
+This project is part of our Data Structures course for the midterms. The project requires us to implement the Stack data structure in converting infix expressions to prefix and postfix expressions and in evaluating postfix expressions.
 
 ## Project Structure
 - `src/` contains the source codes.
